@@ -4,8 +4,7 @@
                           xmlns:rxui="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
                           xmlns:viewModels="clr-namespace:ViewModels;assembly=RxApp.ViewModels"
                           x:TypeArguments="viewModels:MainViewModel"
-                          x:Class="RxApp.Views.MainView"
-                          Title="Page 1">
+                          x:Class="RxApp.Views.MainView">
 
     <StackLayout Margin="10" Spacing="18">
         

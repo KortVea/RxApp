@@ -1,6 +1,6 @@
-﻿using System.Reactive.Disposables;
+﻿using System.Reactive;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using ReactiveMarbles.ObservableEvents;
 using ReactiveUI;
 using Xamarin.Forms;
 
@@ -11,11 +11,11 @@ namespace RxApp.Views
         public MainView()
         {
             InitializeComponent();
-
-            
             
             this.WhenActivated(d =>
             {
+                this.Title = "Page 1";    
+                
                 Observable
                     .FromEventPattern<TextChangedEventArgs>(
                         h => this.Entry.TextChanged += h,
@@ -27,8 +27,14 @@ namespace RxApp.Views
                 this
                     .Bind(this.ViewModel, vm => vm.SliderValue, v => v.Slider.Value)
                     .DisposeWith(d);
-                
-                
+
+                Observable
+                    .FromEventPattern(
+                        h => this.Button.Clicked += h,
+                        h => this.Button.Clicked -= h)
+                    .Select(_ => Unit.Default)
+                    .InvokeCommand(this.ViewModel, vm => vm.ButtonClickedCommand)
+                    .DisposeWith(d);
             });
         }
     }

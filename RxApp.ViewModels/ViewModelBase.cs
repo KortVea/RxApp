@@ -1,18 +1,19 @@
 using ReactiveUI;
 using Sextant;
-using Splat;
 
 namespace ViewModels
 {
-    public abstract class ViewModelBase : ReactiveObject, IViewModel
+    public abstract class ViewModelBase : ReactiveObject, IViewModel, IActivatableViewModel
     {
         public abstract string Id { get; }
     
         protected readonly IViewStackService ViewStackService;
 
-        protected ViewModelBase()
+        protected ViewModelBase(IViewStackService? viewStackService)
         {
-            this.ViewStackService = Locator.Current.GetService<IViewStackService>()!;
+            this.ViewStackService = viewStackService!;
         }
+
+        public ViewModelActivator Activator => new ViewModelActivator();
     }
 }

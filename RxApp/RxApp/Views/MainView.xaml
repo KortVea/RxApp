@@ -7,11 +7,29 @@
                           x:Class="RxApp.Views.MainView"
                           Title="Page 1">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+    <StackLayout Margin="10" Spacing="18">
+        
+        <Label Text="Unlock using pattern" 
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+        
+        <Entry x:Name="Entry" 
+               ClearButtonVisibility="WhileEditing" 
+               WidthRequest="300"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="Center"/>
+        
+        <Switch x:Name="Switch"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+        
+        <Slider x:Name="Slider"
+                WidthRequest="300"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+        
+        <Button x:Name="Button" Text="Click"/>
+        
     </StackLayout>
 
 </rxui:ReactiveContentPage>

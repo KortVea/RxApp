@@ -3,6 +3,9 @@
 /workspace.xml
 # Rider ignored files
 /modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.RxApp.iml
 /.idea.RxApp.iml
 /contentModel.xml
 /projectSettingsUpdater.xml

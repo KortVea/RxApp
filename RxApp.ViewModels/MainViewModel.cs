@@ -11,6 +11,7 @@ namespace ViewModels
     {
         private double sliderValue = 0;
         private string entryValue = string.Empty;
+        private bool switchValue = false;
         
         public MainViewModel(IViewStackService viewStackService, IScheduler mainScheduler) : base(viewStackService)
         {
@@ -22,14 +23,23 @@ namespace ViewModels
             this
                 .WhenAnyValue(x => x.EntryValue)
                 .Subscribe(Console.WriteLine);
-            
-            
 
+            var canExecute =
+                this
+                    .WhenAnyValue(x => x.SwitchValue)
+                    .Buffer(2)
+                    .Select(i => !i[0] && i[1])
+                    .WithLatestFrom(
+                        this
+                            .WhenAnyValue(x => x.SliderValue)
+                            .Select(i => i > 0.5),
+                        (pass, isBig) => pass && isBig);
+            
             this.ButtonClickedCommand =
                 ReactiveCommand
                     .CreateFromObservable(
                         execute: () => ViewStackService.PushPage<ResultModalViewModel>(), 
-                        canExecute: Observable.Return(true),
+                        canExecute: canExecute, //Observable.Return(true),
                         outputScheduler: mainScheduler);
             
         }        
@@ -48,6 +58,12 @@ namespace ViewModels
         {
             get => this.entryValue;
             set => this.RaiseAndSetIfChanged(ref this.entryValue, value);
+        }
+
+        public bool SwitchValue
+        {
+            get => this.switchValue;
+            set => this.RaiseAndSetIfChanged(ref this.switchValue, value);
         }
     }
 }

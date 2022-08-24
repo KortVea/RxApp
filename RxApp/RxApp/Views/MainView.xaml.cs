@@ -28,6 +28,10 @@ namespace RxApp.Views
                     .Bind(this.ViewModel, vm => vm.SliderValue, v => v.Slider.Value)
                     .DisposeWith(d);
 
+                this
+                    .Bind(this.ViewModel, vm => vm.SwitchValue, v => v.Switch.IsToggled)
+                    .DisposeWith(d);
+
                 Observable
                     .FromEventPattern(
                         h => this.Button.Clicked += h,

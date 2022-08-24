@@ -24,22 +24,13 @@ namespace ViewModels
                 .WhenAnyValue(x => x.EntryValue)
                 .Subscribe(Console.WriteLine);
 
-            var canExecute =
-                this
-                    .WhenAnyValue(x => x.SwitchValue)
-                    .Buffer(2)
-                    .Select(i => !i[0] && i[1])
-                    .WithLatestFrom(
-                        this
-                            .WhenAnyValue(x => x.SliderValue)
-                            .Select(i => i > 0.5),
-                        (pass, isBig) => pass && isBig);
-            
-            this.ButtonClickedCommand =
+            var canExecute = Observable.Return(true);
+
+                this.ButtonClickedCommand =
                 ReactiveCommand
                     .CreateFromObservable(
                         execute: () => ViewStackService.PushPage<ResultModalViewModel>(), 
-                        canExecute: canExecute, //Observable.Return(true),
+                        canExecute: canExecute, 
                         outputScheduler: mainScheduler);
             
         }        

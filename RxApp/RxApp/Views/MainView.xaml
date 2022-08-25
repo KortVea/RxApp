@@ -29,6 +29,12 @@
         
         <Button x:Name="Button" Text="Click"/>
         
+        <ListView x:Name="Records"
+                  Margin="4"
+                  BackgroundColor="Aquamarine"
+                  HeightRequest="480"
+                  WidthRequest="320" />
+        
     </StackLayout>
 
 </rxui:ReactiveContentPage>

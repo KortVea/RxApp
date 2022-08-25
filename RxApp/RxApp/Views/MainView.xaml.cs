@@ -39,6 +39,10 @@ namespace RxApp.Views
                     .Select(_ => Unit.Default)
                     .InvokeCommand(this.ViewModel, vm => vm.ButtonClickedCommand)
                     .DisposeWith(d);
+
+                this
+                    .OneWayBind(this.ViewModel, vm => vm.CommandRecords, v => v.Records.ItemsSource)
+                    .DisposeWith(d);
             });
         }
     }

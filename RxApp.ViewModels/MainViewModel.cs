@@ -22,10 +22,12 @@ namespace ViewModels
         {
             this
                 .WhenAnyValue(x => x.SliderValue)
+                .Skip(1)
                 .Throttle(TimeSpan.FromSeconds(0.5))
                 .Select(i => $"Slider value: {i}")
                 .Merge(this
                        .WhenAnyValue(x => x.SwitchValue)
+                       .Skip(1)
                        .Select(i =>
                        {
                            var dir = i ? "up" : "down";
